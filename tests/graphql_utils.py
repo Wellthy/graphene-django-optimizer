@@ -5,10 +5,19 @@ from graphql import (
     Undefined,
     parse,
 )
-from graphql.execution.collect_fields import collect_fields
 from graphql.execution.execute import ExecutionContext
 from graphql.utilities import get_operation_root_type
 from collections import defaultdict
+
+# Import collect_fields conditionally based on graphql-core version
+if graphql.version_info >= (3, 2):
+    try:
+        from graphql.execution.collect_fields import collect_fields
+    except ImportError:
+        # In some versions, collect_fields might be in a different location
+        collect_fields = None
+else:
+    collect_fields = None
 
 from graphql.pyutils import Path
 
