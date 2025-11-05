@@ -186,6 +186,33 @@ class CartType(gql_optimizer.OptimizedDjangoObjectType):
 With these hints, any field can be optimized.
 
 
+### Security: Protecting Against SQL Injection
+
+This library includes a `sanitize_queryset_kwargs` utility function to protect against SQL injection vulnerabilities when using dictionary expansion with Django QuerySet methods like `filter()`, `exclude()`, and `get()`.
+
+**Important:** If you're accepting user input as a dictionary and expanding it into QuerySet methods, always sanitize it first:
+
+```py
+import graphene_django_optimizer as gql_optimizer
+
+# User input that might contain malicious keys
+user_filters = {"name": "test", "_connector": "malicious"}
+
+# Sanitize before using
+safe_filters = gql_optimizer.sanitize_queryset_kwargs(user_filters)
+queryset = Item.objects.filter(**safe_filters)
+```
+
+The `sanitize_queryset_kwargs` function removes the `_connector` key from dictionaries, preventing SQL injection attacks as described in Django security advisories for versions 5.1 before 5.1.14, 4.2 before 4.2.26, and 5.2 before 5.2.8.
+
+**Note:** This is only necessary if you're using dictionary expansion (`**kwargs`) with user-provided dictionaries. Standard keyword arguments are safe:
+
+```py
+# This is safe - no sanitization needed
+queryset = Item.objects.filter(name=user_input_name, value__gte=10)
+```
+
+
 ### Optimize with non model fields
 
 Sometimes we need to have a custom non model fields. In those cases, the optimizer would not optimize with the Django `.only()` method.
