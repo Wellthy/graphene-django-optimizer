@@ -5,7 +5,6 @@ from graphql import (
     Undefined,
     parse,
 )
-from graphql.execution.collect_fields import collect_fields
 from graphql.execution.execute import ExecutionContext
 from graphql.utilities import get_operation_root_type
 from collections import defaultdict
@@ -30,21 +29,14 @@ def create_execution_context(schema, request_string, variables=None):
 
 
 def get_field_asts_from_execution_context(exe_context):
-    if graphql.version_info < (3, 2):
-        fields = exe_context.collect_fields(
-            type,
-            exe_context.operation.selection_set,
-            defaultdict(list),
-            set(),
-        )
-    else:
-        fields = collect_fields(
-            exe_context.schema,
-            exe_context.fragments,
-            exe_context.variable_values,
-            type,
-            exe_context.operation.selection_set,
-        )
+    # Use ExecutionContext's collect_fields method for graphql-core 3.x
+    parent_type = get_operation_root_type(exe_context.schema, exe_context.operation)
+    fields = exe_context.collect_fields(
+        parent_type,
+        exe_context.operation.selection_set,
+        defaultdict(list),
+        set(),
+    )
     # field_asts = next(iter(fields.values()))
     field_asts = tuple(fields.values())[0]
     return field_asts
