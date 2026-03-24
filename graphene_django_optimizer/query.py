@@ -400,7 +400,7 @@ class QueryOptimizerStore:
         if self.prefetch_list:
             queryset = queryset.prefetch_related(*self.prefetch_list)
 
-        if self.only_list:
+        if self.only_list and not self.select_list:
             queryset = queryset.only(*self.only_list)
 
         return queryset
