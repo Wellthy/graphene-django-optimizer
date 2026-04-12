@@ -1,10 +1,10 @@
 -r requirements.txt
-graphene~=3.0.0
-graphene-django==3.0.2
-pytest==4.6.3
-pytest-django==3.5.0
-pytest-cov==2.7.1
+graphene>=3.3,<3.4
+graphene-django==3.1.6
+pytest>=7.4,<8
+pytest-django>=4.5,<5
+pytest-cov>=4.0,<5
 flake8==3.7.7
 mock==2.0.0
-black==21.6b0
-graphql-core~=3.1.7
+black==26.3.1
+graphql-core>=3.2,<3.3
