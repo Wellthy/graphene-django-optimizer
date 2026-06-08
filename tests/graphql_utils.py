@@ -1,16 +1,20 @@
 import graphql.version
+from collections import defaultdict
+
 from graphql import (
     GraphQLResolveInfo,
     Source,
     Undefined,
     parse,
 )
-from graphql.execution.collect_fields import collect_fields
 from graphql.execution.execute import ExecutionContext
 from graphql.utilities import get_operation_root_type
-from collections import defaultdict
-
 from graphql.pyutils import Path
+
+try:
+    from graphql.execution.collect_fields import collect_fields
+except ImportError:
+    collect_fields = None
 
 from graphene_django_optimizer.utils import get_field_def_compat
 
