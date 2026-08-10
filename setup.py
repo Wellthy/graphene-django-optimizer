@@ -1,11 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import os
-import sys
 from setuptools import setup
-
-needs_pytest = {"pytest", "test", "ptr"}.intersection(sys.argv)
-pytest_runner = ["pytest-runner >=4.0,<5dev"] if needs_pytest else []
 
 
 def read(fname):
@@ -22,7 +18,6 @@ setup(
     keywords="graphene django optimizer optimize graphql query prefetch select related",
     url="https://github.com/tfoxy/graphene-django-optimizer",
     packages=["graphene_django_optimizer"],
-    setup_requires=pytest_runner,
     long_description=read("README.md"),
     long_description_content_type="text/markdown",
     classifiers=[
@@ -33,11 +28,11 @@ setup(
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
-        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
         "Framework :: Django",
-        "Framework :: Django :: 2.2",
-        "Framework :: Django :: 3.1",
+        "Framework :: Django :: 4.2",
+        "Framework :: Django :: 5.2",
     ],
 )

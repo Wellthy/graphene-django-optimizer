@@ -5,6 +5,7 @@ from graphql import (
     Undefined,
     parse,
 )
+
 try:
     from graphql.execution.collect_fields import collect_fields
 except ImportError:

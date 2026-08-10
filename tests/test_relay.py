@@ -12,8 +12,7 @@ from .test_utils import assert_query_equality
 def test_should_return_valid_result_in_a_relay_query():
     Item.objects.create(id=7, name="foo")
     # FIXME: Item.parent_id can't be None anymore?
-    result = schema.execute(
-        """
+    result = schema.execute("""
         query {
             relayItems {
                 edges {
@@ -24,8 +23,7 @@ def test_should_return_valid_result_in_a_relay_query():
                 }
             }
         }
-    """
-    )
+    """)
     assert not result.errors
     assert result.data["relayItems"]["edges"][0]["node"]["id"] == "SXRlbU5vZGU6Nw=="
     # assert (
@@ -35,7 +33,9 @@ def test_should_return_valid_result_in_a_relay_query():
     assert result.data["relayItems"]["edges"][0]["node"]["name"] == "foo"
 
 
-@pytest.mark.xfail(reason="FK select_related optimization not working with current graphene-django")
+@pytest.mark.xfail(
+    reason="FK select_related optimization not working with current graphene-django"
+)
 @pytest.mark.django_db
 def test_should_reduce_number_of_queries_in_relay_schema_by_using_select_related():
     info = create_resolve_info(
@@ -123,8 +123,7 @@ def test_should_work_fine_with_page_info_field():
     Item.objects.create(id=7, name="foo")
     Item.objects.create(id=13, name="bar")
     Item.objects.create(id=17, name="foobar")
-    result = schema.execute(
-        """
+    result = schema.execute("""
         query {
             relayItems(first: 2) {
                 pageInfo {
@@ -137,8 +136,7 @@ def test_should_work_fine_with_page_info_field():
                 }
             }
         }
-    """
-    )
+    """)
     assert not result.errors
     assert result.data["relayItems"]["pageInfo"]["hasNextPage"] is True
 
@@ -148,8 +146,7 @@ def test_should_work_fine_with_page_info_field_below_edges_field_when_only_optim
     Item.objects.create(id=7, name="foo")
     Item.objects.create(id=13, name="bar")
     Item.objects.create(id=17, name="foobar")
-    result = schema.execute(
-        """
+    result = schema.execute("""
         query {
             relayItems(first: 2) {
                 edges {
@@ -163,8 +160,7 @@ def test_should_work_fine_with_page_info_field_below_edges_field_when_only_optim
                 }
             }
         }
-    """
-    )
+    """)
     assert not result.errors
     assert result.data["relayItems"]["pageInfo"]["hasNextPage"] is True
 
