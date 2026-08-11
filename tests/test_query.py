@@ -15,7 +15,9 @@ from .schema import schema
 from .test_utils import assert_query_equality
 
 
-@pytest.mark.xfail(reason="FK select_related optimization not working with current graphene-django")
+@pytest.mark.xfail(
+    reason="FK select_related optimization not working with current graphene-django"
+)
 @pytest.mark.django_db
 def test_should_reduce_number_of_queries_by_using_select_related():
     # parent = Item.objects.create(name='foo')
@@ -166,7 +168,9 @@ def test_should_try_to_optimize_non_field_model_fields_when_disabling_abort_only
     assert_query_equality(items, optimized_items)
 
 
-@pytest.mark.xfail(reason="FK select_related optimization not working with current graphene-django")
+@pytest.mark.xfail(
+    reason="FK select_related optimization not working with current graphene-django"
+)
 @pytest.mark.django_db
 def test_should_optimize_when_using_fragments():
     # parent = Item.objects.create(name='foo')
@@ -218,7 +222,9 @@ def test_should_prefetch_field_with_camel_case_name():
     assert_query_equality(items, optimized_items)
 
 
-@pytest.mark.xfail(reason="FK select_related optimization not working with current graphene-django")
+@pytest.mark.xfail(
+    reason="FK select_related optimization not working with current graphene-django"
+)
 @pytest.mark.django_db
 def test_should_select_nested_related_fields():
     # parent = Item.objects.create(name='foo')
@@ -277,7 +283,9 @@ def test_should_prefetch_nested_related_fields():
     assert_query_equality(items, optimized_items)
 
 
-@pytest.mark.xfail(reason="FK select_related optimization not working with current graphene-django")
+@pytest.mark.xfail(
+    reason="FK select_related optimization not working with current graphene-django"
+)
 @pytest.mark.django_db
 def test_should_prefetch_nested_select_related_field():
     # parent = Item.objects.create(name='foo')
@@ -309,7 +317,9 @@ def test_should_prefetch_nested_select_related_field():
     assert_query_equality(items, optimized_items)
 
 
-@pytest.mark.xfail(reason="FK select_related optimization not working with current graphene-django")
+@pytest.mark.xfail(
+    reason="FK select_related optimization not working with current graphene-django"
+)
 @pytest.mark.django_db
 def test_should_select_nested_prefetch_related_field():
     # parent = Item.objects.create(name='foo')
@@ -339,7 +349,9 @@ def test_should_select_nested_prefetch_related_field():
     assert_query_equality(items, optimized_items)
 
 
-@pytest.mark.xfail(reason="FK select_related optimization not working with current graphene-django")
+@pytest.mark.xfail(
+    reason="FK select_related optimization not working with current graphene-django"
+)
 @pytest.mark.django_db
 def test_should_select_nested_prefetch_and_select_related_fields():
     # parent = Item.objects.create(name='foo')
@@ -375,7 +387,9 @@ def test_should_select_nested_prefetch_and_select_related_fields():
     assert_query_equality(items, optimized_items)
 
 
-@pytest.mark.xfail(reason="FK select_related optimization not working with current graphene-django")
+@pytest.mark.xfail(
+    reason="FK select_related optimization not working with current graphene-django"
+)
 @pytest.mark.django_db
 def test_should_fetch_fields_of_related_field():
     # parent = Item.objects.create(name='foo')

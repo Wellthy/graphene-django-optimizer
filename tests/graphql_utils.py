@@ -5,7 +5,11 @@ from graphql import (
     Undefined,
     parse,
 )
-from graphql.execution.collect_fields import collect_fields
+
+try:
+    from graphql.execution.collect_fields import collect_fields
+except ImportError:
+    collect_fields = None
 from graphql.execution.execute import ExecutionContext
 from graphql.utilities import get_operation_root_type
 from collections import defaultdict

@@ -1,18 +1,18 @@
-dist: xenial
+dist: jammy
 language: python
 python:
-  - "3.8"
-  - "3.7.13"
-  - "3.6"
+  - "3.12"
+  - "3.11"
+  - "3.10"
 env:
-  - DJANGO_VERSION=">=3.1.0,<3.2"
-  - DJANGO_VERSION=">=2.2.0,<2.3"
+  - DJANGO_VERSION=">=5.2.16,<5.3"
+  - DJANGO_VERSION=">=4.2.0,<4.3"
 install:
   - pip install -r dev-env-requirements.txt
   - pip install "django$DJANGO_VERSION"
   - pip install codecov
 script:
-  - ./setup.py test
+  - pytest
 after_success:
   - codecov
 jobs:

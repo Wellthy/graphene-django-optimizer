@@ -146,8 +146,7 @@ def test_should_return_valid_result_with_prefetch_related_as_a_function():
     parent = Item.objects.create(id=1, name="foo")
     Item.objects.create(id=2, name="bar", parent=parent)
     Item.objects.create(id=3, name="foobar", parent=parent)
-    result = schema.execute(
-        """
+    result = schema.execute("""
         query {
             items(name: "foo") {
                 id
@@ -159,8 +158,7 @@ def test_should_return_valid_result_with_prefetch_related_as_a_function():
                 }
             }
         }
-    """
-    )
+    """)
     assert not result.errors
     assert result.data["items"][0]["filteredChildren"][0]["id"] == "SXRlbVR5cGU6Mg=="
     assert (
